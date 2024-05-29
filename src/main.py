@@ -1,9 +1,10 @@
 import Person
-person = Person.Person("John",
+import Product
 
-# Call methods or access attributes of the person object
-person.introduce()
-
+def main_menu():
+    print('''
+Welcome to our Store Managment system. Please choose your option:
+1. ''')
 
 
 
