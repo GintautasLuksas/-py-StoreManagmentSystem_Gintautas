@@ -16,29 +16,22 @@ class Product:
             product_details = f'{self.name},{self.price},{self.amount},{self.item_code}\n'
             file.write(product_details)
 
-    def remove_item(item_code: int):
+    def remove_item(self: int):
         try:
             with open('product_list.txt', 'r') as file:
                 lines = file.readlines()
 
             with open('product_list.txt', 'w') as file:
                 for line in lines:
-                    if line.strip():  # Ensure it's not an empty line
+                    if line.strip():
                         details = line.split(',')
-                        if int(details[3]) != item_code:  # Check if item code matches
+                        if int(details[3]) != self:
                             file.write(line)
         except FileNotFoundError:
             print("The file 'product_list.txt' does not exist.")
         except Exception as e:
             print(f"An error occurred: {e}")
 
-
-
-
-
-
-
-
-
-
-             
+    def show_products(self):
+        with open('product_list.txt') as file:
+            print(file.read())
