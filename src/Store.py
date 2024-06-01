@@ -2,26 +2,37 @@ from Person import Worker, Manager, StoreManager
 class Store:
     def __init__(self, store_name: str, worker: list, managers: list, store_manager: str):
         self.store_name = store_name
-        self.workers = []
-        self.managers = []
-        self.store_manager = None
+        self.workers = worker
+        self.managers = managers
+        self.store_manager = store_manager
         self.stock = []
 
     def show_people(self):
         print("In this store are working:")
 
         print("\nWorkers:")
-        for worker in self.workers:
-            worker.personal_info()
-            worker.contact_info()
-            worker.display_rate()
-            worker.display_amount_worked()
-            worker.display_salary()
+        if isinstance(self.workers, list):
+            for worker in self.workers:
+                worker.personal_info()
+                worker.contact_info()
+                worker.display_rate()
+                worker.display_amount_worked()
+                worker.display_salary()
+        else:
+            self.workers.personal_info()
+            self.workers.contact_info()
+            self.workers.display_rate()
+            self.workers.display_amount_worked()
+            self.workers.display_salary()
 
         print("\nManagers:")
-        for manager in self.managers:
-            manager.mgr_info()
-            manager.display_salary()
+        if isinstance(self.managers, list):
+            for manager in self.managers:
+                manager.mgr_info()
+                manager.display_salary()
+        else:
+            self.managers.mgr_info()
+            self.managers.display_salary()
 
         print("\nStore Manager:")
         self.store_manager.mgr_info()

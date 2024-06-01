@@ -154,7 +154,7 @@ def show_products_in_stock(my_store):
         print(file.read())
     main_menu(my_store)
 
-#Store functionality.
+#Using Store functionality.
 def manage_store_menu(my_store):
     while True:
         print('''
@@ -190,5 +190,9 @@ def manage_store_menu(my_store):
             print("Invalid choice. Please enter a valid option.")
 
 
-my_store = create_store()
+
+worker1 = Worker("Johnny Bravo", 123456789, "johnny@gmail.com", "USA", 15.0, 40)
+manager1 = Manager("Taylor Swiss", 987654321, "taylors@gmail.com", "UK", 5000, "Sales")
+store_manager = StoreManager("Bossy Boss", 66613, "bossy@boss.com", "Lithuania", 7000, "MyStore", ["Manage staff", "Oversee operations"], 1000)
+my_store = Store.Store('Mystore', worker1, manager1, store_manager)
 main_menu(my_store)
