@@ -2,25 +2,31 @@ from Person import Worker, Manager, StoreManager
 class Store:
     def __init__(self, store_name: str, worker: list, managers: list, store_manager: str):
         self.store_name = store_name
-        self.worker = worker
-        self.managers = managers
-        self.store_manager = store_manager
-        self.stock = ['deb', 'dab']
+        self.workers = []
+        self.managers = []
+        self.store_manager = None
+        self.stock = []
 
     def show_people(self):
-            worker_list = '\n'.join(self.worker)
-            managers_list = '\n'.join(self.managers)
-            print(f'''
-    In this store are working:
-    Workers:
-    {worker_list}
+        print("In this store are working:")
 
-    Managers:
-    {managers_list}
+        print("\nWorkers:")
+        for worker in self.workers:
+            worker.personal_info()
+            worker.contact_info()
+            worker.display_rate()
+            worker.display_amount_worked()
+            worker.display_salary()
 
-    Store Manager:
-    {self.store_manager}
-    ''')
+        print("\nManagers:")
+        for manager in self.managers:
+            manager.mgr_info()
+            manager.display_salary()
+
+        print("\nStore Manager:")
+        self.store_manager.mgr_info()
+        self.store_manager._MGRsalary()
+        self.store_manager._MGRcash()
     def show_stock(self):
         print('Currently we have these items in stock:')
         for items in self.stock:
@@ -45,11 +51,11 @@ class Store:
         with open('product_list.txt', 'w') as file:
             file.truncate()
 
-    def add_worker(self, worker: Worker):
+    def add_worker(self, worker):
         self.workers.append(worker)
 
-    def add_manager(self, manager: Manager):
+    def add_manager(self, manager):
         self.managers.append(manager)
 
-    def set_store_manager(self, store_manager: StoreManager):
+    def set_store_manager(self, store_manager):
         self.store_manager = store_manager
