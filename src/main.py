@@ -5,9 +5,39 @@ from Product import Product, Dry_storage, Food
 # We need to have store to fill it with people and goods.
 def create_store():
     store_name = input("Enter store name: ")
+
     workers = []
+    num_workers = int(input("Enter number of workers: "))
+    for _ in range(num_workers):
+        name = input("Enter worker's name: ")
+        phone = int(input("Enter worker's phone number: "))
+        email = input("Enter worker's email: ")
+        country = input("Enter worker's country: ")
+        hourly_rate = float(input("Enter worker's hourly rate: "))
+        amount_worked = int(input("Enter worker's amount worked: "))
+        workers.append(Worker(name, phone, email, country, hourly_rate, amount_worked))
+
     managers = []
-    store_manager = None
+    num_managers = int(input("Enter number of managers: "))
+    for _ in range(num_managers):
+        name = input("Enter manager's name: ")
+        phone = int(input("Enter manager's phone number: "))
+        email = input("Enter manager's email: ")
+        country = input("Enter manager's country: ")
+        salary = int(input("Enter manager's salary: "))
+        responsibility = input("Enter manager's responsibility: ")
+        managers.append(Manager(name, phone, email, country, salary, responsibility))
+
+    print("Enter store manager details:")
+    name = input("Enter store manager's name: ")
+    phone = int(input("Enter store manager's phone number: "))
+    email = input("Enter store manager's email: ")
+    country = input("Enter store manager's country: ")
+    monthly_salary = int(input("Enter store manager's monthly salary: "))
+    store_name = input("Enter store manager's store name: ")
+    responsibilities = input("Enter store manager's responsibilities (comma separated): ").split(',')
+    petty_cash = int(input("Enter store manager's petty cash: "))
+    store_manager = StoreManager(name, phone, email, country, monthly_salary, store_name, responsibilities, petty_cash)
 
     my_store = Store.Store(store_name, workers, managers, store_manager)
     return my_store
@@ -191,8 +221,5 @@ def manage_store_menu(my_store):
 
 
 
-worker1 = Worker("Johnny Bravo", 123456789, "johnny@gmail.com", "USA", 15.0, 40)
-manager1 = Manager("Taylor Swiss", 987654321, "taylors@gmail.com", "UK", 5000, "Sales")
-store_manager = StoreManager("Bossy Boss", 66613, "bossy@boss.com", "Lithuania", 7000, "MyStore", ["Manage staff", "Oversee operations"], 1000)
-my_store = Store.Store('Mystore', worker1, manager1, store_manager)
+my_store = create_store()
 main_menu(my_store)
