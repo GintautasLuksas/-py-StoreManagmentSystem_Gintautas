@@ -2,7 +2,8 @@ class Person:
     def __init__(self, name: str, phone: int, email: str, country: str):
         self.name = name
         self.phone = phone
-        self.email = email
+        self.email = (
+            email)
         self.country = country
 
     def contact_info(self):

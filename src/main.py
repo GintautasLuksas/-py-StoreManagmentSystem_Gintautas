@@ -150,13 +150,16 @@ def manage_products_menu(my_store):
         manage_products_menu(my_store)
 
 def add_product_to_stock(my_store):
+    print("Enter product details:")
     name = input("Enter product's name: ")
-    price = int(input("Enter product's price: "))
+    price = float(input("Enter product's price: "))
     amount = int(input("Enter product's amount: "))
     item_code = int(input("Enter product's item code: "))
-    product_type = input("Enter product type (Dry storage/Food): ").lower()
+    product_type = input("Enter product type (Dry Storage or Food): ").lower()
 
-    if product_type == 'dry storage':
+    if product_type == 'product':
+        product = Product(name, price, amount, item_code)
+    elif product_type == 'dry storage':
         is_recipe = input("Is this item part of a recipe? (True/False): ").lower() == 'true'
         is_chemical = input("Is this item a hazardous chemical? (True/False): ").lower() == 'true'
         package = input("Enter package type: ")
@@ -166,8 +169,10 @@ def add_product_to_stock(my_store):
         storage_conditions = input("Enter storage conditions: ")
         product = Food(name, price, amount, item_code, expiry_date, storage_conditions)
     else:
-        product = Product(name, price, amount, item_code)
+        print("Invalid product type.")
+        return
 
+    my_store.stock.append(product)
     product.add_item()
     print(f"{name} has been added to {my_store.store_name}'s stock.")
     main_menu(my_store)
@@ -193,7 +198,8 @@ def manage_store_menu(my_store):
         2. Show Stock
         3. Load Item List
         4. Remove Item List
-        5. Back to Main Menu
+        5. _secret Menu
+        6. Back to Main Menu
         ''')
         choice = input("Enter your choice: ")
         if choice == '1':
@@ -214,10 +220,95 @@ def manage_store_menu(my_store):
             main_menu(my_store)
             break
         elif choice == '5':
+            authenticate_and_show_secret_menu(my_store)
+        elif choice == '6':
             main_menu(my_store)
             break
         else:
             print("Invalid choice. Please enter a valid option.")
+
+#Secret menu.
+def _secret_menu(my_store):
+    while True:
+        print('''
+        Secret Menu:
+        1. Manage Petty Cash
+        2. Add / Remove Tasks
+        3. Back to Main Menu
+        ''')
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            manage_petty_cash(my_store)
+        elif choice == '2':
+            add_remove_tasks(my_store)
+        elif choice == '3':
+            break
+        else:
+            print("Invalid choice. Please enter a valid option.")
+
+def manage_petty_cash(my_store):
+    while True:
+        print('''
+        Manage Petty Cash:
+        1. Add to Petty Cash
+        2. Remove from Petty Cash
+        3. View Current Petty Cash Balance
+        4. Back to Secret Menu
+        ''')
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            amount = float(input("Enter amount to add: "))
+            my_store.store_manager._petty_expense(-amount)
+            print(f"Added {amount} to petty cash. New balance: {my_store.store_manager.petty_cash}")
+        elif choice == '2':
+            amount = float(input("Enter amount to remove: "))
+            my_store.store_manager._petty_expense(amount)
+            print(f"Removed {amount} from petty cash. New balance: {my_store.store_manager.petty_cash}")
+        elif choice == '3':
+            my_store.store_manager._MGRcash()
+        elif choice == '4':
+            break
+        else:
+            print("Invalid choice. Please enter a valid option.")
+
+def add_remove_tasks(my_store):
+    while True:
+        print('''
+        Add / Remove Tasks:
+        1. Add Task
+        2. Remove Task
+        3. View Tasks
+        4. Back to Secret Menu
+        ''')
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            task = input("Enter task to add: ")
+            my_store.store_manager.add_task(task)
+            print(f"Added task: {task}")
+        elif choice == '2':
+            task = input("Enter task to remove: ")
+            if task in my_store.store_manager.responsibilities:
+                my_store.store_manager.responsibilities.remove(task)
+                print(f"Removed task: {task}")
+            else:
+                print(f"Task '{task}' not found.")
+        elif choice == '3':
+            print(f"Current tasks: {', '.join(my_store.store_manager.responsibilities)}")
+        elif choice == '4':
+            break
+        else:
+            print("Invalid choice. Please enter a valid option.")
+def authenticate_and_show_secret_menu(my_store):
+    password = input("Enter the password to access the secret menu: ")
+    if password == "123456":
+        _secret_menu(my_store)
+    else:
+        print("Incorrect password. Access denied.")
+        main_menu(my_store)
+
 
 
 
