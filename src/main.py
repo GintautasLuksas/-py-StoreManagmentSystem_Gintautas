@@ -50,7 +50,8 @@ def main_menu(my_store):
     1. Manage People
     2. Manage Products
     3. Manage Store
-    4. Exit
+    4. Manage People Info
+    5. Exit
     ''')
     choice = input("Enter your choice: ")
     if choice == '1':
@@ -60,6 +61,8 @@ def main_menu(my_store):
     elif choice == '3':
         manage_store_menu(my_store)
     elif choice == '4':
+        manage_people_info_menu(my_store)
+    elif choice == '5':
         print("Thanks for using SMS. Bye.")
     else:
         print("Invalid choice. Please enter a valid option.")
@@ -309,7 +312,70 @@ def authenticate_and_show_secret_menu(my_store):
         print("Incorrect password. Access denied.")
         main_menu(my_store)
 
+def manage_people_info_menu(my_store):
+    while True:
+        print('''
+        People info:
+        1. Worker information
+        2. Manager information
+        3. Back to Main Menu
+        ''')
+        choice = input("Enter your choice: ")
 
+        if choice == '1':
+            worker_information(my_store)
+        elif choice == '2':
+            manager_information(my_store)
+        elif choice == '3':
+
+            break
+        else:
+            print("Invalid choice. Please enter a valid option.")
+def worker_information(my_store):
+    while True:
+        print('''
+           Worker information:
+           1. Display Amount Worked
+           2. Display Rate
+           3. Display Salary
+           4. Back to Main Menu
+           ''')
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            for worker in my_store.workers:
+                worker.display_amount_worked()
+        elif choice == '2':
+            for worker in my_store.workers:
+                worker.display_rate()
+        elif choice == '3':
+            for worker in my_store.workers:
+                worker.display_salary()
+        elif choice == '4':
+            break
+        else:
+            print("Invalid choice. Please enter a valid option.")
+def manager_information(my_store):
+    while True:
+        print('''
+           Manager information:
+           1. Display Salary
+           2. Manager Info
+           3. Back to Main Menu
+           ''')
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            for manager in my_store.managers:
+                manager.display_salary()
+        elif choice == '2':
+            for manager in my_store.managers:
+                manager.mgr_info()
+        elif choice == '3':
+            main_menu(my_store)
+            break
+        else:
+            print("Invalid choice. Please enter a valid option.")
 
 
 my_store = create_store()
