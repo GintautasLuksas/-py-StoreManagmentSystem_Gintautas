@@ -5,11 +5,6 @@ class Product:
         self.amount = amount
         self.item_code = item_code
 
-    def edit_name(self, edited: str):
-        self.name = edited
-
-    def edit_code(self, new_code: int):
-        self.item_code = new_code
 
     def add_item(self):
         with open('product_list.txt', 'a') as file:

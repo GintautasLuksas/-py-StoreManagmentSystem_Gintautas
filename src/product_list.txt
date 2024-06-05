@@ -1,6 +1,3 @@
-Late,30.0,4,344
-Late,30.0,4,344
-TUlizis,40.0,50,3333,2024.05.05,freezer
-Citrina,40.0,60,400,2024.04.05,Good
+L
 Product name:Citrina,Price:100.0Euros ,400Units, WRIN:3422,Expiry date:2024.05.06,Storage condition: Freezer
 Product name: 123, Price:123.0Euros, 124 Units, WRIN: 124, Is recipe:False, Is chemical: True, Package type: Big

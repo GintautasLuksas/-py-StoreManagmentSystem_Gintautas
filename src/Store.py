@@ -38,10 +38,7 @@ class Store:
         self.store_manager.mgr_info()
         self.store_manager._MGRsalary()
         self.store_manager._MGRcash()
-    def show_stock(self):
-        print('Currently we have these items in stock:')
-        for items in self.stock:
-            print(items)
+
 
 
     def load_item_list(self, filename: str):
